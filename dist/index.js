@@ -4,8 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const fs_1 = __importDefault(require("fs"));
 const app = (0, express_1.default)();
-const port = 3000; // Define the port
+const port = 4000; // Define the port
 // Define the /api/hello endpoint
 app.get("/api/hello", (req, res) => {
     res.json({ message: "Hello, world!" });
@@ -14,3 +15,9 @@ app.get("/api/hello", (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+const matches = fs_1.default.readFileSync("worldCup.csv", {
+    encoding: "utf-8"
+}).split("\n").map((row) => {
+    return row.split(",");
+});
+console.log(matches);
